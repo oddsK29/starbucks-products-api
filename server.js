@@ -1,8 +1,5 @@
 const fastify = require('fastify')({ logger: true })
-
-fastify.register(require('fastify-postgres'), {
-    connectionString: 'postgres://root:admin@localhost:5432/starbucksdb'
-})
+const knex = require('./configs/db.configs.js'); 
 
 fastify.register(require('./src/routes/products.routes.js'))
 

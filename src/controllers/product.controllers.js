@@ -1,37 +1,68 @@
-const ProductModel = require('../services/products.services.js')
+const productsService = require('../services/products.services');
 
-class ProductController {
-    constructor(client) {
-        this.productModel = new ProductModel(client)
+class ProductsController {
+  async createProducts(req, reply) {
+    try {
+      const product = await productsService.createProducts(req.body);
+      reply.status(200).send(product);
+    } catch (err) {
+      req.log.error(err);
+      reply.status(500).internalServerError('Unable to create product');
     }
+  }
 
-    async getAll(request, reply) {
-        const products = await this.productModel.getAll()
-        reply.send(products)
+  async getProductsById(req, reply) {
+    try {
+      const product = await productsService.getProductsById(req.params.id);
+      if (!product) {
+        reply.notFound(`Products with id ${req.params.id} not found`);
+      } else {
+        reply.status(200).send(product);
+      }
+    } catch (err) {
+      req.log.error(err);
+      reply.status(500).internalServerError('Unable to fetch product');
     }
+  }
 
-    async getById(request, reply) {
-        const id = request.params.id
-        const product = await this.productModel.getById(id)
-        reply.send(product)
+  async getAllProductss(req, reply) {
+    try {
+      const products = await productsService.getAllProductss();
+      reply.status(200).send(products);
+    } catch (err) {
+      req.log.status(500).error(err);
     }
+  }
 
-    async create(request, reply) {
-        const newProduct = await this.productModel.create(request.body)
-        reply.send(newProduct)
+  async updateProducts(req, reply) {
+    try {
+      const product = await productsService.updateProducts(req.params.id, req.body);
+      if (!product) {
+        reply.notFound(`product with id ${req.params.id} not found`);
+      } else {
+        reply.status(200).send(product);
+      }
+    } catch (err) {
+      req.log.error(err);
+      reply.status(500).internalServerError('Unable to update product');
     }
+  }
 
-    async update(request, reply) {
-        const id = request.params.id
-        const updatedProduct = await this.productModel.update(id, request.body)
-        reply.send(updatedProduct)
+  async deleteProducts(req, reply) {
+    try {
+      const success = await productsService.deleteProducts(req.params.id);
+      if (!success) {
+        reply.status(404).notFound(`product with id ${req.params.id} not found`);
+      } else {
+        reply.status(200).send({ message: `product with id ${req.params.id} deleted successfully` });
+      }
+    } catch (err) {
+      req.log.error(err);
+      reply.status(500).internalServerError('Unable to delete product');
     }
+  }
 
-    async delete(request, reply) {
-        const id = request.params.id
-        const deletedProduct = await this.productModel.delete(id)
-        reply.send(deletedProduct)
-    }
+
 }
 
-module.exports = ProductController
+module.exports = new ProductsController();
