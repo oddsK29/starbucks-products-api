@@ -4,11 +4,14 @@ class ProductsModel extends Model {
     static get tableName() {
         return 'products';
     }
+    static get idColumn() {
+        return 'id';
+      }
+
     static get jsonSchema() {
         return {
             type: 'object',
             required: [
-                'id',
                 'name',
                 'description',
                 'price',
@@ -21,7 +24,6 @@ class ProductsModel extends Model {
                 'stock'
             ],
             properties: {
-                id: { type: 'integer' },
                 name: { type: 'string' },
                 description: { type: 'string' },
                 price: { type: 'number' },

@@ -1,4 +1,3 @@
-const { error } = require('console');
 const productsService = require('../services/products.services');
 
 class ProductsController {
@@ -50,7 +49,6 @@ class ProductsController {
     }
 
     async findByGrindOption(req, reply) {
-        console.log('req', JSON.stringify(req.query.grind_option, null, 4));
         const { grind_option } = req.query;
         try {
             if (!grind_option) {
@@ -58,6 +56,22 @@ class ProductsController {
             }
             const products = await productsService.getAllProductss();
             const filterProducts = products.filter((item) => item.grind_option.includes(grind_option))
+            reply.status(200).send(filterProducts);
+        } catch (err) {
+            console.log(err);
+            req.log.error(err);
+            reply.status(500).send({ error: 'Unable to fetch products' });
+        }
+    }
+
+    async findByFlavorProfile(req, reply) {
+        const { flavor_profile } = req.query;
+        try {
+            if (!flavor_profile) {
+                throw Error()
+            }
+            const products = await productsService.getAllProductss();
+            const filterProducts = products.filter((item) => item.flavor_profile.includes(flavor_profile))
             reply.status(200).send(filterProducts);
         } catch (err) {
             console.log(err);
