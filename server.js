@@ -1,7 +1,8 @@
 const fastify = require('fastify')({ logger: true })
-const knex = require('./configs/db.configs.js'); 
+const knex = require('./configs/db.configs.js');
+const routes = require('./src/routes/routes.js')
 
-fastify.register(require('./src/routes/products.routes.js'))
+fastify.register(routes);
 
 const start = async () => {
     try {
