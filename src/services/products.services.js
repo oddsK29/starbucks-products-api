@@ -1,4 +1,4 @@
-const productsRepository = require('../repositories/product.repositories');
+const productsRepository = require('../repositories/products.repositories');
 
 class ProductsService {
     async createProducts(data) {

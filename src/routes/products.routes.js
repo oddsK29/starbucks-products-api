@@ -1,4 +1,4 @@
-const productsController = require('../controllers/product.controllers');
+const productsController = require('../controllers/products.controllers');
 
 async function productsRoutes(fastify, options) {
     fastify.post('/', productsController.createProducts);
