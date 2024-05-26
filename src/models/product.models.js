@@ -1,6 +1,6 @@
 const { Model } = require('objection');
 
-class ProductsModel extends Model{
+class ProductsModel extends Model {
     static get tableName() {
         return 'products';
     }
@@ -8,32 +8,36 @@ class ProductsModel extends Model{
         return {
             type: 'object',
             required: [
-              'id',  
-              'name', 
-              'description',
-              'price', 
-              'region', 
-              'weight', 
-              'flavor_profile',
-              'grind_option', 
-              'roast_level', 
-              'image_url', 
-              'stock'
+                'id',
+                'name',
+                'description',
+                'price',
+                'region',
+                'weight',
+                'flavor_profile',
+                'grind_option',
+                'roast_level',
+                'image_url',
+                'stock'
             ],
             properties: {
                 id: { type: 'integer' },
                 name: { type: 'string' },
-                description: { type: 'string'},
-                price: { type: 'integer' },
+                description: { type: 'string' },
+                price: { type: 'number' },
                 region: { type: 'string' },
-                weight: { type: 'integer'},
-                flavor_profile: { type: 'object' },
-                grind_option: { type: 'object' },
-                roast_level: { type: 'string' },
-                image_url: { type: 'object' },
+                weight: { type: 'number' },
+                flavor_profile: { type: 'array', items: { type: 'string' } },
+                grind_option: { type: 'array', items: { type: 'string' } },
+                roast_level: { type: 'integer' },
+                image_url: {
+                    type: 'array',
+                    items: { type: 'string', format: 'uri' },
+                    minItems: 1
+                },
                 stock: { type: 'integer' }
-              },
-            };
-        }
+            },
+        };
+    }
 }
 module.exports = ProductsModel;

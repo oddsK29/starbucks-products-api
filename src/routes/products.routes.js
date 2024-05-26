@@ -1,11 +1,12 @@
 const productsController = require('../controllers/product.controllers');
 
-async function registerRoutes(fastify, options) {
-  fastify.post('/registers', productsController.createProducts);
-  fastify.get('/registers/:id', productsController.getProductsById);
-  fastify.get('/registers', productsController.getAllProductss);
-  fastify.put('/registers/:id', productsController.updateProducts);
-  fastify.delete('/registers/:id', productsController.deleteProducts);
+async function productsRoutes(fastify, options) {
+    fastify.post('/', productsController.createProducts);
+    fastify.get('/', productsController.getAllProductss);
+    fastify.get('/:id', productsController.getProductsById);
+    fastify.put('/:id', productsController.updateProducts);
+    fastify.delete('/:id', productsController.deleteProducts);
+    fastify.get('/grind', productsController.findByGrindOption);
 }
 
-module.exports = registerRoutes;
+module.exports = productsRoutes;
