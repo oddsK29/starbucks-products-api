@@ -25,6 +25,10 @@ class OrderService {
         return await orderRepository.findOrderDetailsCountByOrderId(id);
     }
 
+    async getOrderDetailsByUserId(users_id){
+        return await orderRepository.findOrderDetailsByUserId(users_id);
+    }
+
 }
 
 module.exports = new OrderService();

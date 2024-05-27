@@ -34,6 +34,18 @@ class ordersRoutes {
         }
     }
 
+
+    async getOrderDetailsByUserId(req, reply) {
+        try {
+            const orderDetailsCount = await orderService.getOrderDetailsByUserId(req.params.users_id);
+            return reply.status(200).send(orderDetailsCount);
+        } catch (err) {
+            req.log.error(err);
+            reply.status(500).internalServerError('Unable to delete product');
+        }
+    }
+
+
     async createOrder(req, reply) {
         try {
             const order = await orderService.createOrder(req.body);

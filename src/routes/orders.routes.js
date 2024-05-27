@@ -4,6 +4,7 @@ async function ordersRoutes(fastify, options) {
     fastify.get('/', orderControllers.getAllOrders);
     fastify.get('/:id', orderControllers.getOrderById);
     fastify.get('/count/:id', orderControllers.getOrderDetailsCountByOrderId);
+    fastify.get('/user/:users_id', orderControllers.getOrderDetailsByUserId);
     fastify.put('/:id', orderControllers.updateOrder);
     fastify.delete('/:id', orderControllers.deleteOrder);
 }

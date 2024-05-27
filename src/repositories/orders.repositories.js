@@ -21,6 +21,14 @@ class OrderRepository {
       .first();
   }
 
+  async findOrderDetailsByUserId(users_id){
+    return await OrderDetailModel.query()
+    .join('orders', 'orderdetail.orders_id', 'orders.id')
+    .where('orders.users_id', users_id)
+    .select('orderdetail.*', 'orders.users_id');
+
+  }
+
   async update(id, data) {
     return await OrderModel.query().patchAndFetchById(id, data);
   }
