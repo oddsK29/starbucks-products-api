@@ -20,6 +20,10 @@ class OrderService {
     async deleteOrder(id) {
         return await orderRepository.delete(id);
     }
+    
+    async getOrderDetailsCountByOrderId(id){
+        return await orderRepository.findOrderDetailsCountByOrderId(id);
+    }
 
 }
 

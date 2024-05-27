@@ -9,7 +9,7 @@ class ordersRoutes {
             req.log.status(500).error(err);
         }
     }
-    
+
     async getOrderById(req, reply) {
         try {
             const order = await orderService.getOrderById(req.params.id);
@@ -21,6 +21,16 @@ class ordersRoutes {
         } catch (err) {
             req.log.error(err);
             reply.status(500).internalServerError('Unable to fetch order');
+        }
+    }
+
+    async getOrderDetailsCountByOrderId(req, reply) {
+        try {
+            const orderDetailsCount = await orderService.getOrderDetailsCountByOrderId(req.params.id);
+            return reply.status(200).send(orderDetailsCount);
+        } catch (err) {
+            req.log.error(err);
+            reply.status(500).internalServerError('Unable to delete product');
         }
     }
 

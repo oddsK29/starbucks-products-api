@@ -1,4 +1,5 @@
 const OrderModel = require('../models/orders.models');
+const OrderDetailModel = require('../models/orderdetail.models');
 
 class OrderRepository {
   async create(data) {
@@ -11,6 +12,13 @@ class OrderRepository {
 
   async findAll() {
     return await OrderModel.query().select();
+  }
+
+  async findOrderDetailsCountByOrderId(id) {
+    return await OrderDetailModel.query()
+      .where('orders_id', id)
+      .count('id as count')
+      .first();
   }
 
   async update(id, data) {
