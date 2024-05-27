@@ -21,12 +21,13 @@ class OrderRepository {
       .first();
   }
 
-  async findOrderDetailsByUserId(users_id){
+  async findOrderDetailsShoppingByUserId(id,users_id){
     return await OrderDetailModel.query()
     .join('orders', 'orderdetail.orders_id', 'orders.id')
-    .where('orders.users_id', users_id)
+    .where('orders.id', id)
+    .andWhere('orders.users_id', users_id)
+    .andWhere('orders.status', 'shopping')
     .select('orderdetail.*', 'orders.users_id');
-
   }
 
   async update(id, data) {
@@ -37,6 +38,9 @@ class OrderRepository {
     let ordersCompleteDate;
     if (status === 'complete') {
       ordersCompleteDate = new Date().toISOString(); 
+      await OrderDetailModel.query()
+      .where('orders_id', id)
+      .patch({ orders_complete_date: ordersCompleteDate });
     }
     return await OrderModel.query() 
     .findById(id)

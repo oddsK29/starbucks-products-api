@@ -29,8 +29,8 @@ class OrderService {
         return await orderRepository.findOrderDetailsCountByOrderId(id);
     }
 
-    async getOrderDetailsByUserId(users_id){
-        return await orderRepository.findOrderDetailsByUserId(users_id);
+    async findOrderDetailsShoppingByUserId(id,users_id){
+        return await orderRepository.findOrderDetailsShoppingByUserId(id,users_id);
     }
 
 }
