@@ -10,7 +10,7 @@ class OrderDetail extends Model {
   }
 
   static get relationMappingsProduct() {
-    const Products = require('./product.models'); // Assuming you have a Product model
+    const Products = require('./product.models'); 
     return {
       product: {
         relation: Model.BelongsToOneRelation,
@@ -24,7 +24,7 @@ class OrderDetail extends Model {
   }
 
   static get relationMappingsOrders() {
-    const Products = require('./orders.models'); // Assuming you have a Product model
+    const Products = require('./orders.models'); 
     return {
       product: {
         relation: Model.BelongsToOneRelation,
