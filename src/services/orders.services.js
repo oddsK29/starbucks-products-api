@@ -17,6 +17,10 @@ class OrderService {
         return await orderRepository.update(id, data);
     }
 
+    async updateOrderStatus(id, status) {
+        return await orderRepository.updateOrderStatus(id,status);
+    }
+
     async deleteOrder(id) {
         return await orderRepository.delete(id);
     }

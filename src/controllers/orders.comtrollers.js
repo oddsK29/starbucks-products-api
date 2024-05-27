@@ -71,6 +71,22 @@ class ordersRoutes {
         }
     }
 
+
+    async updateOrderStatus(req, reply) {
+        try {
+            const order = await orderService.updateOrderStatus(req.params.id, req.body.status);
+            if (!order) {
+                reply.notFound(`order with id ${req.params.id} not found`);
+            } else {
+                reply.status(200).send(order);
+            }
+        } catch (err) {
+            req.log.error(err);
+            reply.status(500).internalServerError('Unable to update order');
+        }
+    }
+
+
     async deleteOrder(req, reply) {
         try {
             const success = await orderService.deleteOrder(req.params.id);

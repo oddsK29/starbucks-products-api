@@ -33,6 +33,21 @@ class OrderRepository {
     return await OrderModel.query().patchAndFetchById(id, data);
   }
 
+  async updateOrderStatus(id,status) {
+    let ordersCompleteDate;
+    if (status === 'complete') {
+      ordersCompleteDate = new Date().toISOString(); 
+    }
+    return await OrderModel.query() 
+    .findById(id)
+    .patch({
+      status,
+      orders_complete_date: ordersCompleteDate
+    })
+    .returning('*');
+  }
+
+
   async delete(id) {
     return await OrderModel.query().deleteById(id);
   }
