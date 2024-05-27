@@ -32,7 +32,13 @@ class OrderService {
     async findOrderDetailsShoppingByUserId(id,users_id){
         return await orderRepository.findOrderDetailsShoppingByUserId(id,users_id);
     }
+    async calculateTotalByOrderId (id){
+        return await orderRepository.calculateTotalByOrderId(id);
+    }
 
+    async completeOrderAndSumTotal (id,status){
+        return await orderRepository.completeOrderAndSumTotal(id,status);
+    }
 }
 
 module.exports = new OrderService();

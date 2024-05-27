@@ -37,8 +37,8 @@ class ordersRoutes {
 
     async getOrderDetailsShoppingByUserId(req, reply) {
         try {
-            const orderDetailsCount = await orderService.findOrderDetailsShoppingByUserId(req.params.id,req.params.users_id);
-            if (orderDetailsCount[0] != null){
+            const orderDetailsCount = await orderService.findOrderDetailsShoppingByUserId(req.params.id, req.params.users_id);
+            if (orderDetailsCount[0] != null) {
                 return reply.status(200).send(orderDetailsCount);
             }
             return reply.status(200).send("The orders is done");
@@ -101,6 +101,28 @@ class ordersRoutes {
         } catch (err) {
             req.log.error(err);
             reply.status(500).internalServerError('Unable to delete product');
+        }
+    }
+
+    async calculateTotalByOrderId(req, reply) {
+        try {
+            const order = await orderService.calculateTotalByOrderId(req.params.id);
+            console.log(order);
+            reply.status(200).send(order);
+
+        } catch (err) {
+
+        }
+    }
+
+    async completeOrderAndSumTotal(req, reply) {
+        try {
+            const order = await orderService.completeOrderAndSumTotal(req.params.id, req.body.status);
+            console.log(order);
+            reply.status(200).send(order);
+
+        } catch (err) {
+
         }
     }
 

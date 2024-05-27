@@ -8,6 +8,9 @@ async function ordersRoutes(fastify, options) {
     fastify.put('/:id', orderControllers.updateOrder);
     fastify.put('/status/:id', orderControllers.updateOrderStatus);
     fastify.delete('/:id', orderControllers.deleteOrder);
+
+    fastify.get('/total/:id', orderControllers.calculateTotalByOrderId);
+    fastify.put('/status/total/:id', orderControllers.completeOrderAndSumTotal);
 }
 
 module.exports = ordersRoutes;
