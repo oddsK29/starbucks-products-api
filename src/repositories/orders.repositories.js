@@ -14,13 +14,6 @@ class OrderRepository {
     return await OrderModel.query().select();
   }
 
-  async findOrderDetailsCountByOrderId(id) {
-    return await OrderDetailModel.query()
-      .where('orders_id', id)
-      .count('id as count')
-      .first();
-  }
-
   async findOrderDetailsShoppingByUserId(id, users_id) {
     return await OrderDetailModel.query()
       .join('orders', 'orderdetail.orders_id', 'orders.id')
@@ -85,10 +78,15 @@ class OrderRepository {
     return total;
   }
 
-
   async delete(id) {
     return await OrderModel.query().deleteById(id);
   }
+  
+  async findOrdersByUserId(users_id) {
+    return await OrderModel.query()
+        .where('users_id', users_id)
+        .select('*');
+}
 
 }
 

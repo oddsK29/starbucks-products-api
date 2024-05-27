@@ -24,17 +24,6 @@ class ordersRoutes {
         }
     }
 
-    async getOrderDetailsCountByOrderId(req, reply) {
-        try {
-            const orderDetailsCount = await orderService.getOrderDetailsCountByOrderId(req.params.id);
-            return reply.status(200).send(orderDetailsCount);
-        } catch (err) {
-            req.log.error(err);
-            reply.status(500).internalServerError('Unable to delete product');
-        }
-    }
-
-
     async getOrderDetailsShoppingByUserId(req, reply) {
         try {
             const orderDetailsCount = await orderService.findOrderDetailsShoppingByUserId(req.params.id, req.params.users_id);
@@ -126,6 +115,18 @@ class ordersRoutes {
         }
     }
 
+    async getOrdersByUserId(req, reply) {
+       
+        try {
+            const order = await orderService.findOrdersByUserId(req.params.users_id);
+            reply.status(200).send(order);
+        } catch (err) {
+            req.log.error(err);
+            reply.status(500).internalServerError('Unable to update order');
+        }
+    }
+
+   
 }
 
 module.exports = new ordersRoutes();

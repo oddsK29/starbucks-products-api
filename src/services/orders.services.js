@@ -24,20 +24,21 @@ class OrderService {
     async deleteOrder(id) {
         return await orderRepository.delete(id);
     }
-    
-    async getOrderDetailsCountByOrderId(id){
-        return await orderRepository.findOrderDetailsCountByOrderId(id);
-    }
 
     async findOrderDetailsShoppingByUserId(id,users_id){
         return await orderRepository.findOrderDetailsShoppingByUserId(id,users_id);
     }
+
     async calculateTotalByOrderId (id){
         return await orderRepository.calculateTotalByOrderId(id);
     }
 
     async completeOrderAndSumTotal (id,status){
         return await orderRepository.completeOrderAndSumTotal(id,status);
+    }
+
+    async findOrdersByUserId(users_id){
+        return await orderRepository.findOrdersByUserId(users_id);
     }
 }
 
