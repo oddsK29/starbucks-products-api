@@ -126,6 +126,21 @@ class ordersRoutes {
         }
     }
 
+    async findOrdersByStatus(req, reply) {
+        const { orderstatus } = req.query;
+        try {
+            if (!orderstatus) {
+                throw Error()
+            }
+            const orders = await orderService.getAllOrders();
+            const filterOrders = orders.filter((item) => item.status.includes(orderstatus))
+            reply.status(200).send(filterOrders);
+        } catch (err) {
+            console.log(err);
+            req.log.error(err);
+            reply.status(500).send({ error: 'Unable to fetch Orders' });
+        }
+    }
    
 }
 
