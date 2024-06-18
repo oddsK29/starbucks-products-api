@@ -1,5 +1,7 @@
 # starbucks-products-api
 
+##USE 
+ Docker TablePlus
 ## Introduction
 
    Assumption customer want to add E-commerce feature into this application Order feature Users can order with the amount of order Each order should match the supply Each supply can be sold out The supply depends on API that contains every order supply
@@ -18,7 +20,11 @@
     # or
     yarn install
     ```
-4. Start the server:
+4. Install docker compose
+    ```sh
+   docker compose up -d
+    ```
+6. Start the server:
     ```sh
     yarn dev
     ```
